@@ -23,6 +23,13 @@ app.get('/restaurants/:id', (req, res) => {
     let rstSelect = rstData.results.find(item => item.id.toString() === selectID)
     res.render('show', { rst: rstSelect })
 })
+//search
+app.get('/search', (req, res) => {
+    let keyword = req.query.keyword
+    let rstList = rstData.results.filter(item => (item.name + item.category).toLowerCase().includes(keyword.toLowerCase()))
+    let noResult = rstList.length===0? true: false
+    res.render('index', { rstList: rstList, keyword: keyword, noResult: noResult })
+})
 
 // start and listen on the Express server
 app.listen(port, () => {
