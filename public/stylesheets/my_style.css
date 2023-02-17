@@ -35,6 +35,14 @@ header {
     color: #9b4b4b;
 }
 
+.input-group {
+    border-radius: 0.375rem;
+}
+
+.input-group:focus-within {
+    box-shadow: 1px 1px 20px palevioletred;
+}
+
 .form-control::placeholder {
     color: #aaaaaa;
     font-size: 0.8rem;
