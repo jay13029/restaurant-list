@@ -26,7 +26,7 @@ app.get('/restaurants/:id', (req, res) => {
 //search
 app.get('/search', (req, res) => {
     let keyword = req.query.keyword
-    let rstList = rstData.results.filter(item => (item.name + item.category).toLowerCase().includes(keyword.toLowerCase()))
+    let rstList = rstData.results.filter(item => (item.name +' '+ item.name_en +' '+ item.category).toLowerCase().includes(keyword.toLowerCase()))
     let noResult = rstList.length===0? true: false
     res.render('index', { rstList: rstList, keyword: keyword, noResult: noResult })
 })
