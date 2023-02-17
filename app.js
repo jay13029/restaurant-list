@@ -4,6 +4,8 @@ const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
 
+const rstData = require('./restaurant.json')
+
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -13,9 +15,13 @@ app.use(express.static('public'))
 
 // routes setting
 app.get('/', (req, res) => {
-    // res.send('This is my restaurant list')
-    res.render('index')
-
+    res.render('index', { rstList: rstData.results})
+})
+//restaurant detail page
+app.get('/restaurants/:id', (req, res) => {
+    let selectID = req.params.id;
+    let rstSelect = rstData.results.find(item => item.id.toString() === selectID)
+    res.render('show', { rst: rstSelect })
 })
 
 // start and listen on the Express server
