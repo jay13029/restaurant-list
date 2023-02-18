@@ -25,7 +25,7 @@ app.get('/restaurants/:id', (req, res) => {
 })
 // search
 app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
+  const keyword = req.query.keyword.trim()
   const rstList = rstData.results.filter(item => (item.name + ' ' + item.name_en + ' ' + item.category).toLowerCase().includes(keyword.toLowerCase()))
   const noResult = rstList.length === 0
   res.render('index', { rstList, keyword, noResult })
