@@ -15,23 +15,23 @@ app.use(express.static('public'))
 
 // routes setting
 app.get('/', (req, res) => {
-    res.render('index', { rstList: rstData.results})
+  res.render('index', { rstList: rstData.results })
 })
-//restaurant detail page
+// restaurant detail page
 app.get('/restaurants/:id', (req, res) => {
-    let selectID = req.params.id;
-    let rstSelect = rstData.results.find(item => item.id.toString() === selectID)
-    res.render('show', { rst: rstSelect })
+  const selectID = req.params.id
+  const rstSelect = rstData.results.find(item => item.id.toString() === selectID)
+  res.render('show', { rst: rstSelect })
 })
-//search
+// search
 app.get('/search', (req, res) => {
-    let keyword = req.query.keyword
-    let rstList = rstData.results.filter(item => (item.name +' '+ item.name_en +' '+ item.category).toLowerCase().includes(keyword.toLowerCase()))
-    let noResult = rstList.length===0? true: false
-    res.render('index', { rstList: rstList, keyword: keyword, noResult: noResult })
+  const keyword = req.query.keyword
+  const rstList = rstData.results.filter(item => (item.name + ' ' + item.name_en + ' ' + item.category).toLowerCase().includes(keyword.toLowerCase()))
+  const noResult = rstList.length === 0
+  res.render('index', { rstList, keyword, noResult })
 })
 
 // start and listen on the Express server
 app.listen(port, () => {
-    console.log(`App is listening on http://localhost:${port}`)
+  console.log(`App is listening on http://localhost:${port}`)
 })

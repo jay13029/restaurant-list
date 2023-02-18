@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sstest": "npx standard app.js",
+    "ssfix": "npx standard --fix app.js"
   },
   "keywords": [],
   "author": "",
