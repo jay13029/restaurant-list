@@ -7,8 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sstest": "npx standard app.js",
-    "ssfix": "npx standard --fix app.js"
+    "sstest": "npx standard ./*.js",
+    "ssfix": "npx standard --fix ./*.js"
   },
   "keywords": [],
   "author": "",
