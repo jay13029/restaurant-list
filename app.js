@@ -1,8 +1,9 @@
 // require packages used in the project
 const express = require('express')
 const exphbs = require('express-handlebars')
-const rstData = require('./restaurant.json')
+// const rstData = require('./restaurant.json')
 const mongoose = require('mongoose')
+const Restaurant = require('./models/restaurant')
 
 const app = express()
 const port = 3000
@@ -32,14 +33,23 @@ app.use(express.static('public'))
 
 // routes setting
 app.get('/', (req, res) => {
-  res.render('index', { rstList: rstData.results })
+  Restaurant.find()
+    .lean()
+    .then(rstList => res.render('index', { rstList }))
+    .catch(error => console.log(error))
 })
+
 // restaurant detail page
 app.get('/restaurants/:id', (req, res) => {
   const selectID = req.params.id
-  const rstSelect = rstData.results.find(item => item.id.toString() === selectID)
-  res.render('show', { rst: rstSelect })
+  return Restaurant.findById(selectID)
+    .lean()
+    .then( rst => res.render('show', { rst }))
+    .catch(error => console.log(error))
+    // const rstSelect = rstData.results.find(item => item.id.toString() === selectID)
+  // res.render('show', { rst: rstSelect })
 })
+
 // search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
