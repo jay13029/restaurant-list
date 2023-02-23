@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars')
 // const rstData = require('./restaurant.json')
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
+const bodyParser = require('body-parser')
 
 const app = express()
 const port = 3000
@@ -28,6 +29,8 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // setting static files
 app.use(express.static('public'))
 
@@ -37,6 +40,17 @@ app.get('/', (req, res) => {
     .lean()
     .then(rstList => res.render('index', { rstList }))
     .catch(error => console.log(error))
+})
+
+//new
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  Restaurant.create(req.body)
+    .then(() => res.redirect("/"))
+    .catch(err => console.log(err))
 })
 
 // restaurant detail page
@@ -53,9 +67,15 @@ app.get('/restaurants/:id', (req, res) => {
 // search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
-  const rstList = rstData.results.filter(item => (item.name + ' ' + item.name_en + ' ' + item.category).toLowerCase().includes(keyword.toLowerCase()))
-  const noResult = rstList.length === 0
-  res.render('index', { rstList, keyword, noResult })
+  return Restaurant.find()
+    .lean()
+    .then( rstData => {
+      const rstList = rstData.filter(
+        item => (item.name + ' ' + item.name_en + ' ' + item.category).toLowerCase().includes(keyword.toLowerCase()))
+      const noResult = rstList.length === 0
+       res.render('index', { rstList: rstList, keyword, noResult})
+    })
+    .catch(error => console.log(error))
 })
 
 // start and listen on the Express server
