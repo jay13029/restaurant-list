@@ -48,6 +48,11 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 app.post('/restaurants', (req, res) => {
+  for(const key in req.body){
+    if(req.body[key].trim() === ''){
+      return res.send(`<script>alert("Please check \'${key}\' field."); history.go(-1); </script>`)
+    }
+  }
   Restaurant.create(req.body)
     .then(() => res.redirect("/"))
     .catch(err => console.log(err))
@@ -60,8 +65,6 @@ app.get('/restaurants/:id', (req, res) => {
     .lean()
     .then( rst => res.render('show', { rst }))
     .catch(error => console.log(error))
-    // const rstSelect = rstData.results.find(item => item.id.toString() === selectID)
-  // res.render('show', { rst: rstSelect })
 })
 
 // search
