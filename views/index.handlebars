@@ -30,13 +30,11 @@
         <div class="col-md-10 col-12 mx-auto">
             <div class="row row-cols-sm-3">
                 {{#each rstList}}
-                <a href="/restaurants/{{this._id}}" class="rst-card text-secondary" title="{{this.name_en}}">
+                <div class="rst-card text-secondary">
                     <div class="card mb-3">
-                        <img class="card-img-top"
-                            src="{{this.image}}"
-                            alt="{{this.name}}">
+                        <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
                         <div class="card-body p-3">
-                            <h6 class="card-title mb-1">{{this.name}}</h6>
+                            <h6 class="card-title mb-1" title="{{this.name_en}}">{{this.name}}</h6>
 
                             <div class="restaurant-category mb-1">
                                 <i class="fas fa-utensils pr-2"></i> {{this.category}}
@@ -46,10 +44,16 @@
                                 {{this.rating}}
                                 <i class="fas fa-star fa-xs"></i>
                             </span>
-
                         </div>
                     </div>
-                </a>
+                    <div class="action-area d-flex justify-content-end gap-3 mb-4">
+                        <a href="/restaurants/{{this._id}}/edit" class="edit-link" title="編輯">Edit</a>
+                        <a href="/restaurants/{{this._id}}" class="detail-link" title="查看詳細資料">Detail</a>
+                        <form action="/restaurants/{{this._id}}/delete" method="post">
+                            <button class="delete-btn btn btn-danger btn-sm" title="刪除">Delete</button>
+                        </form>
+                    </div>
+                </div>
                 {{/each}}
             </div>
         </div>
