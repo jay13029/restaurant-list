@@ -17,19 +17,20 @@ db.on('error', () => {
 })
 
 db.once('open', () => {
-	console.log('mongodb connected.')
-  for(let i in rstAll) {
+  console.log('mongodb connected.')
+  for (const i in rstAll) {
     const rstRow = rstAll[i]
-		Restaurant.create({ name: rstRow.name,
-                        name_en: rstRow.name_en,
-                        category: rstRow.category,
-                        image: rstRow.image,
-                        location: rstRow.location,
-                        phone: rstRow.phone,
-                        google_map: rstRow.google_map,
-                        rating: rstRow.rating,
-                        description: rstRow.description
-                      })
+    Restaurant.create({
+      name: rstRow.name,
+      name_en: rstRow.name_en,
+      category: rstRow.category,
+      image: rstRow.image,
+      location: rstRow.location,
+      phone: rstRow.phone,
+      google_map: rstRow.google_map,
+      rating: rstRow.rating,
+      description: rstRow.description
+    })
   }
-	console.log('done.')
+  console.log('done.')
 })
