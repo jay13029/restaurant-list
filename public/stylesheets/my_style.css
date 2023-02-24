@@ -132,6 +132,10 @@ div.rst-card:hover > div.action-area {
 
 }
 
+#index-page a:hover {
+    color: lightskyblue;
+}
+
 .btn-area button, .btn-area a[type=button] {
     margin-right: 5px;
     margin-left: 5px;

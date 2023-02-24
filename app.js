@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // setting static files
 app.use(express.static('public'))
 
-// routes setting
+// ========== routes setting ==========
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
@@ -89,6 +89,15 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//Delete
+app.post('/restaurants/:id/delete', (req, res) => {
+  const selectID = req.params.id
+  return Restaurant.findById(selectID)
+    .then(rst => rst.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 // search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
@@ -102,6 +111,8 @@ app.get('/search', (req, res) => {
     })
     .catch(error => console.log(error))
 })
+
+// ========== End of route setting ==========
 
 // start and listen on the Express server
 app.listen(port, () => {
