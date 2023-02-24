@@ -8,8 +8,8 @@
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node models/seeds/restaurantSeeder.js",
-    "sstest": "npx standard ./*.js",
-    "ssfix": "npx standard --fix ./*.js"
+    "sstest": "npx standard",
+    "ssfix": "npx standard --fix"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,10 @@
   },
   "devDependencies": {
     "dotenv": "^16.0.3"
+  },
+  "standard": {
+    "ignore": [
+      "public/javascripts/"
+    ]
   }
 }

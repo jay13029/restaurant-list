@@ -42,19 +42,19 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
-//new
+// new
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
 })
 
 app.post('/restaurants', (req, res) => {
-  for(const key in req.body){
-    if(req.body[key].trim() === ''){
-      return res.send(`<script>alert("Please check \'${key}\' field."); history.go(-1); </script>`)
+  for (const key in req.body) {
+    if (req.body[key].trim() === '') {
+      return res.send(`<script>alert("Please check '${key}' field."); history.go(-1); </script>`)
     }
   }
   Restaurant.create(req.body)
-    .then(() => res.redirect("/"))
+    .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
 
@@ -63,16 +63,16 @@ app.get('/restaurants/:id', (req, res) => {
   const selectID = req.params.id
   return Restaurant.findById(selectID)
     .lean()
-    .then( rst => res.render('show', { rst }))
+    .then(rst => res.render('show', { rst }))
     .catch(error => console.log(error))
 })
 
-//edit
+// edit
 app.get('/restaurants/:id/edit', (req, res) => {
   const selectID = req.params.id
   return Restaurant.findById(selectID)
     .lean()
-    .then( rst => res.render('edit', { rst }))
+    .then(rst => res.render('edit', { rst }))
     .catch(error => console.log(error))
 })
 
@@ -80,7 +80,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
   const selectID = req.params.id
   return Restaurant.findById(selectID)
     .then(rst => {
-      for(const key in req.body){
+      for (const key in req.body) {
         rst[key] = req.body[key]
       }
       return rst.save()
@@ -89,7 +89,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-//Delete
+// Delete
 app.post('/restaurants/:id/delete', (req, res) => {
   const selectID = req.params.id
   return Restaurant.findById(selectID)
@@ -103,11 +103,11 @@ app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
   return Restaurant.find()
     .lean()
-    .then( rstData => {
+    .then(rstData => {
       const rstList = rstData.filter(
         item => (item.name + ' ' + item.name_en + ' ' + item.category).toLowerCase().includes(keyword.toLowerCase()))
       const noResult = rstList.length === 0
-       res.render('index', { rstList: rstList, keyword, noResult})
+      res.render('index', { rstList, keyword, noResult })
     })
     .catch(error => console.log(error))
 })

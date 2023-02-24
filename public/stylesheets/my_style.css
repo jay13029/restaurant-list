@@ -134,9 +134,24 @@ div.rst-card:hover > div.action-area {
 
 #index-page a:hover {
     color: lightskyblue;
+    background-color: indigo;
+    border-radius: 5px;
 }
 
 .btn-area button, .btn-area a[type=button] {
     margin-right: 5px;
     margin-left: 5px;
+}
+
+a.map-link i{
+    color: chocolate
+}
+
+a.map-link:hover i{
+    color: lightskyblue;
+}
+
+.rst-desc {
+    color: chocolate;
+    font-size: large;
 }
