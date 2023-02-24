@@ -67,6 +67,28 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//edit
+app.get('/restaurants/:id/edit', (req, res) => {
+  const selectID = req.params.id
+  return Restaurant.findById(selectID)
+    .lean()
+    .then( rst => res.render('edit', { rst }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  const selectID = req.params.id
+  return Restaurant.findById(selectID)
+    .then(rst => {
+      for(const key in req.body){
+        rst[key] = req.body[key]
+      }
+      return rst.save()
+    })
+    .then(() => res.redirect(`/restaurants/${selectID}`))
+    .catch(error => console.log(error))
+})
+
 // search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()

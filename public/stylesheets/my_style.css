@@ -131,3 +131,8 @@ div.rst-card:hover > div.action-area {
     }
 
 }
+
+.btn-area button, .btn-area a[type=button] {
+    margin-right: 5px;
+    margin-left: 5px;
+}

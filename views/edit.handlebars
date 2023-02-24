@@ -1,60 +1,60 @@
-<h1 class="mb-1 restaurant-show-title">新增餐廳</h1>
+<h1 class="mb-1 restaurant-show-title">編輯餐廳</h1>
 <div class="container" >
-    <form class="mx-5" action="/restaurants" method="post">
+    <form class="mx-5" action="/restaurants/{{rst._id}}/edit" method="post">
         <div class="row my-3">
             <div class="col">
                 <label for="name" class="form-label">餐廳名稱<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="我的餐廳" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="我的餐廳" value="{{rst.name}}" required>
             </div>
             <div class="col">
                 <label for="name_en" class="form-label">英文名稱<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="name_en" name="name_en" placeholder="My Restaurant" required>
+                <input type="text" class="form-control" id="name_en" name="name_en" placeholder="My Restaurant" value="{{rst.name_en}}" required>
             </div>
         </div>
 
         <div class="row my-3">
             <div class="col">
                 <label for="category" class="form-label">類別<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="category" name="category" placeholder="中式餐廳" required>
+                <input type="text" class="form-control" id="category" name="category" placeholder="中式餐廳" value="{{rst.category}}" required>
             </div>
             <div class="col">
                 <label for="image" class="form-label">圖片位置<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="image" name="image" placeholder="image url" required>
+                <input type="text" class="form-control" id="image" name="image" placeholder="image url" value="{{rst.image}}" required>
             </div>
         </div>
 
         <div class="row my-3">
             <div class="col">
                 <label for="location" class="form-label">地點<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="location" name="location" placeholder="台北市梅花路168號" required>
+                <input type="text" class="form-control" id="location" name="location" placeholder="台北市梅花路168號" value="{{rst.location}}" required>
             </div>
             <div class="col">
                 <label for="phone" class="form-label">電話<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="08-88225252" required>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="08-88225252" value="{{rst.phone}}" required>
             </div>
         </div>
 
         <div class="row my-3">
             <div class="col">
                 <label for="google_map" class="form-label">地圖連結<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="google_map" name="google_map" placeholder="link to goole map" required>
+                <input type="text" class="form-control" id="google_map" name="google_map" placeholder="link to goole map" value="{{rst.google_map}}" required>
             </div>
             <div class="col">
                 <label for="rating" class="form-label">評分<span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="rating" name="rating" min="0" max="5" step="0.1" required>
+                <input type="number" class="form-control" id="rating" name="rating" min="0" max="5" step="0.1" value="{{rst.rating}}" required>
             </div>
         </div>
 
         <div class="row my-3">
             <div class="col">
                 <label for="description" class="form-label">介紹</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3" required>{{rst.description}}</textarea>
             </div>
         </div>
 
         <div class="text-center btn-area">
-            <button type="submit" class="btn btn-success" title="送出">Submit</button>
-            <button type="button" class="btn btn-dark" title="返回" onclick="history.go(-1)">Back</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-dark" onclick="history.go(-1)">Back</button>
         </div>
     </form>
 </div>
