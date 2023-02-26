@@ -1,6 +1,6 @@
 <h1 class="mb-1 restaurant-show-title">編輯餐廳</h1>
 <div class="container" >
-    <form class="mx-5" action="/restaurants/{{rst._id}}/edit" method="post">
+    <form class="mx-5" action="/restaurants/{{rst._id}}?_method=PUT" method="post">
         <div class="row my-3">
             <div class="col">
                 <label for="name" class="form-label">餐廳名稱<span class="text-danger">*</span></label>
