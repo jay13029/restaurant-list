@@ -21,15 +21,12 @@ header {
 }
 
 .add-btn {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    background: floralwhite;
+    background-color: #c47752;
+    color: floralwhite;
 }
 
 .add-btn:hover {
-    background-color: #c47752;
-    color: floralwhite;
+    background-color: #fce2cf;
 }
 
 .search-bar .search-bar-outer {
@@ -136,6 +133,12 @@ div.rst-card:hover > div.action-area {
     color: lightskyblue;
     background-color: indigo;
     border-radius: 5px;
+}
+
+#sort-select {
+    position: absolute;
+    right: -190px;
+    width: 150px;
 }
 
 .btn-area button, .btn-area a[type=button] {

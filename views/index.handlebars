@@ -1,7 +1,6 @@
 <!-- search bar -->
 <div class="container search-bar">
     <div class="search-bar-outer position-relative">
-        <a type="button" class="btn add-btn" href="/restaurants/new">+新增</a>
         <div class="search-bar-inner">
             <form action="/search">
                 <h4 class="mb-2">尋找餐廳：</h4>
@@ -9,11 +8,21 @@
                     <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類"
                         aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
                     <div class="input-group-append">
-                        <button class="btn btn-major" type="submit" id="search-button"><i
-                                class="fas fa-search"></i></button>
+                        <button class="btn btn-major" type="submit" id="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
                 </div>
             </form>
+        </div>
+        <div id="sort-select">
+            <select class="form-select" name="sort" id="sort">
+                <option value="">---Sort---</option>
+                <option value="name|asc">A->Z</option>
+                <option value="name|desc">Z->A</option>
+                <option value="category">類別</option>
+                <option value="location">地區</option>
+            </select>
         </div>
     </div>
 </div>
@@ -49,7 +58,8 @@
                     <div class="action-area d-flex justify-content-end align-items-center gap-3 mb-4">
                         <a href="/restaurants/{{this._id}}/edit" class="edit-link p-1" title="編輯">Edit</a>
                         <a href="/restaurants/{{this._id}}" class="detail-link p-1" title="查看詳細資料">Detail</a>
-                        <form action="/restaurants/{{this._id}}?_method=DELETE" method="post" onsubmit="return confirm('確定要刪除嗎?')">
+                        <form action="/restaurants/{{this._id}}?_method=DELETE" method="post"
+                            onsubmit="return confirm('確定要刪除嗎?')">
                             <button class="delete-btn btn btn-danger btn-sm" title="刪除">Delete</button>
                         </form>
                     </div>
@@ -62,7 +72,27 @@
 </div>
 
 <script>
-    //function ConfirmDelete() {
-      // return confirm("確定要刪除嗎?")
-    //}
+    SortSelectSet()
+    document.getElementById("sort").onchange = function() {
+        let sort = this.value;
+        if (sort === '') return
+        window.location.href = ReplaceUrlParam(window.location.href, 'sort', sort) 
+    }
+
+    function SortSelectSet() {
+        const urlParams = new URLSearchParams(window.location.search)
+        const sortValue = urlParams.get('sort')
+        if(sortValue !== null) {
+            const sort = document.querySelector('#sort')
+            sort.value = sortValue
+        }
+    }
+
+    function ReplaceUrlParam(url, key, value) {
+        let nowUrl = new URL(url)
+        let queryStr = new URLSearchParams(nowUrl.search)
+        queryStr.set(key, value)
+        nowUrl.search = queryStr
+        return nowUrl.toString()
+    }
 </script>

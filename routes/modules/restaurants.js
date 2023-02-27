@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
-
 // new
 router.get('/new', (req, res) => {
   res.render('new')
@@ -58,6 +57,5 @@ router.delete('/:id', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-
 
 module.exports = router
